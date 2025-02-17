@@ -32,7 +32,6 @@ export class ProductsService {
       return new ResponseFail(ResponseMessages.FAIL.EXIST_NO_ID(category_id));
     }
 
-    console.log(createProductDto);
     const newProduct = this.productsRepository.create({ ...createProductDto, category });
     const result = await this.productsRepository.save(newProduct);
     return new ResponseSuccess(ResponseMessages.SUCCESS.CREATE_OBJECT(product_name), result);
@@ -46,8 +45,19 @@ export class ProductsService {
     return `This action returns a #${id} product`;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(createProductDto: CreateProductDto) {
+    const { id, product_name, category_id } = createProductDto;
+    const existingProducts = await this.productsRepository.find({ where: { product_name } });
+    if (predicateHelpers.exists(existingProducts)) {
+      return new ResponseFail(ResponseMessages.FAIL.EXISTS_ALREADY_NAME);
+    }
+
+    const category = await this.categoriesRepository.findOne({ where: { id: category_id } });
+    if (!category) {
+      return new ResponseFail(ResponseMessages.FAIL.EXIST_NO_ID(category_id));
+    }
+
+    return;
   }
 
   remove(id: number) {
