@@ -13,7 +13,7 @@ export class Product extends BaseCustomEntity {
   @Column({ type: 'decimal', precision: 10, nullable: false, default: 0, comment: '상품 가격' })
   product_price: number;
 
-  @Column({ type: 'varchar', length: 255, nullable: true, unique: true, comment: '상품 이미지 경로' })
+  @Column({ type: 'varchar', length: 255, nullable: true, comment: '상품 이미지 경로' })
   product_image_src: string;
 
   @Column({ type: 'int', nullable: false, default: 0, comment: '상품 재고 수량' })

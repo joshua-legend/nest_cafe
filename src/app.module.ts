@@ -14,7 +14,7 @@ import { Product } from './products/entities/product.entity';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '127.0.0.1',
-      port: 3307,
+      port: 3306,
       username: 'joshua',
       password: '1234',
       database: 'cafe',
